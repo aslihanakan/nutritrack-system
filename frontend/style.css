@@ -1,0 +1,785 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0; 
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #eef4ef;
+    color: #1f2933;
+}
+
+/* ─── Auth ────────────────────────────────────────────────────────── */
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-card {
+    width: 380px;
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.auth-card h1 { color: #2f7d46; margin-bottom: 8px; }
+.auth-card p  { color: #6b7280; margin-bottom: 20px; }
+
+.auth-wide {
+    width: 760px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 26px;
+    align-items: center;
+}
+
+.auth-image {
+    width: 100%;
+    max-height: 260px;
+    object-fit: contain;
+}
+
+/* ─── Base elements ──────────────────────────────────────────────── */
+input, select {
+    width: 100%;
+    padding: 11px;
+    margin: 8px 0;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-weight: 600;
+}
+
+.primary-btn {
+    width: 100%;
+    background: #4f9d63;
+    color: white;
+    margin-top: 10px;
+}
+
+.text-btn {
+    background: transparent;
+    color: #2f7d46;
+    margin-top: 10px;
+}
+
+.message { margin-top: 12px; color: #dc2626; }
+
+/* ─── Layout ─────────────────────────────────────────────────────── */
+.layout {
+    display: flex;
+    min-height: 100vh;
+    align-items: stretch;
+}
+
+.sidebar {
+    width: 220px;
+    background: #12324a;
+    color: white;
+    padding: 20px 14px;
+    flex-shrink: 0;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #b7f0c0;
+}
+
+.logo-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.logo-box small { color: #b7e4c7; font-size: 12px; }
+
+.text-logo { margin-bottom: 28px; }
+
+.nav-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 10px;
+    background: transparent;
+    color: #dbeafe;
+}
+
+.nav-btn:hover, .nav-btn.active { background: #1f4f6d; }
+
+.logout-btn { margin-top: 20px; color: #fecaca; }
+
+.main { 
+    flex: 1; 
+    padding: 0; 
+    overflow-x: hidden; 
+    display: flex;
+    flex-direction: column;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #164e2f; 
+    padding: 30px 25px;   
+    margin-bottom: 16px;  
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.topbar > div:first-child {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.topbar h1, .topbar h2, .topbar h3, .topbar h4, .topbar .page-title {
+    color: #ffffff !important; 
+    font-size: 21px;       
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+.page-subtitle { 
+    margin: 0;
+    color: #cbdccb; 
+    font-size: 13px;       
+    font-weight: 400;
+}
+
+.user-box {
+    background: white;
+    padding: 6px 12px;     
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.main > *:not(.topbar) {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+/* ─── Cards ──────────────────────────────────────────────────────── */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    margin-bottom: 16px;   
+    display: flex;
+    flex-direction: column; 
+}
+
+.card h3 { margin-top: 0; margin-bottom: 12px; }
+
+.big-number {
+    font-size: 32px;
+    font-weight: bold;
+    color: #2f7d46;
+}
+
+.muted { color: #667085; font-size: 14px; }
+
+/* ─── Progress bar ───────────────────────────────────────────────── */
+.progress {
+    height: 10px;
+    background: #e5e7eb;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #4f9d63;
+    transition: width 0.4s ease;
+}
+
+/* ─── Hero card (Yatay, İnce ve Profesyonel Düzen) ───────────────── */
+.hero-card {
+    background: linear-gradient(135deg, #ffffff, #e8f8ef);
+    border-radius: 16px;   
+    padding: 12px 20px;    
+    margin-bottom: 14px;   
+    display: flex !important;
+    flex-direction: row !important; /* İçeriği kesinlikle yan yana dizer */
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 6px 16px rgba(7, 88, 211, 0.05);
+    text-align: left; /* Yazıları sola yaslar */
+}
+
+.hero-card h2 { margin: 0 0 4px 0; color: #164e2f; font-size: 20px; }
+.hero-card p { margin: 0; font-size: 14px; }
+
+/* Raporlar sayfasındaki dairesel ven şeması görselinin sağa tam oturması için */
+.hero-card img {
+    max-height: 55px; /* İnce şeride tam sığacak yükseklik */
+    width: auto;
+    object-fit: contain;
+    margin: 0 0 0 15px;
+}
+
+/* ─── Meals page / Page Intro (Meal Tracking Sayfası İçin İnce Düzen) ─── */
+.page-intro {
+    display: flex !important;
+    flex-direction: row !important; /* Alt alta dizilmeyi önler, yan yana alır */
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;    
+    margin-bottom: 14px;   
+    background: linear-gradient(135deg, #ffffff, #f0fdf4);
+    border-radius: 16px;
+    text-align: left;
+}
+
+/* Yazıların alt alta düzgün kalıp görselin sağa geçmesi için div sarmalı kuralı */
+.page-intro > div:first-child {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.page-intro h2, .page-intro h3 {
+    margin: 0;
+    color: #164e2f;
+    font-size: 20px;
+}
+
+.page-intro p {
+    margin: 0;
+    font-size: 14px;
+    color: #1f2933;
+}
+
+.intro-img {
+    max-height: 55px; /* İnce şeride sığması için dikey sınır */
+    width: auto;
+    object-fit: contain;
+    margin: 0 0 0 15px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   DASHBOARD  ─  3 üst kart yan yana, tam genişlik
+   ══════════════════════════════════════════════════════════════════ */
+.top-stats-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 16px;   
+    align-items: stretch; 
+}
+
+.stat-card {
+    position: relative;
+    min-height: 170px;
+}
+
+.calories-wide-card { min-height: 170px; }
+
+.calories-inner {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.calories-left { flex: 0 0 auto; min-width: 140px; }
+
+/* Makro halka */
+.macro-ring-wrap { flex: 0 0 auto; }
+
+.macro-ring {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.macro-ring-center {
+    width: 58px;
+    height: 58px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+}
+
+.macro-ring-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1f2933;
+    line-height: 1;
+}
+
+.macro-ring-center small {
+    font-size: 10px;
+    color: #667085;
+}
+
+/* Legend */
+.macro-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+.macro-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.legend-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.macro-legend-item div { display: flex; flex-direction: column; line-height: 1.2; }
+.macro-legend-item strong { font-size: 16px; color: #1f2933; }
+.macro-legend-item small  { font-size: 11px; color: #667085; }
+
+/* stat-content for weekly/BMI */
+.stat-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Donut (weekly / BMI) */
+.donut {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: conic-gradient(#4f9d63 var(--value), #e5e7eb 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.donut::after {
+    content: "";
+    width: 48px;
+    height: 48px;
+    background: white;
+    border-radius: 50%;
+}
+
+.bmi-donut { background: conic-gradient(#f97316 var(--value), #e5e7eb 0); }
+.water-donut { background: conic-gradient(#38bdf8 var(--value), #e5e7eb 0); }
+
+/* Mini bar chart */
+.mini-chart {
+    width: 90px;
+    height: 70px;
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.bar {
+    width: 16px;
+    border-radius: 8px 8px 0 0;
+    background: #4f9d63;
+}
+
+/* ─── Dashboard bottom row ──────────────────────────────────────── */
+.dashboard-bottom {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 18px;
+    margin-top: 0;
+    align-items: stretch; 
+}
+
+.image-card { text-align: center; }
+
+.image-card img {
+    width: 100%;
+    max-height: 150px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+/* Hydration card override - ORTALANMIŞ DÜZEN */
+.hydration-card {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+}
+
+.hydration-left { 
+    width: 100%; 
+    display: flex;
+    justify-content: center;
+}
+.hydration-left img { width: 100%; max-height: 160px; object-fit: contain; }
+
+.hydration-right { 
+    width: 100%; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hydration-right .progress {
+    width: 100%;
+    max-width: 280px;
+    margin: 8px auto;
+}
+
+.water-input-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    width: 100%;
+    max-width: 320px;
+    justify-content: center;
+}
+
+.water-input-row input { flex: 1; margin: 0; }
+
+.hydration-bottom {
+    width: 100%; 
+    display: flex;
+    justify-content: center; 
+    margin-top: 10px; 
+}
+
+.drink-more-img {
+    width: 100%;
+    max-height: 120px; 
+    object-fit: contain;
+}
+
+.exercise-input-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.exercise-input-row input { width: 50%; margin: 0; }
+
+.small-wide-btn { width: 100%; margin-top: 10px; }
+
+.mini-data-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f0fdf4;
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+.weigh-card input { margin: 6px 0 10px 0; }
+
+.small-label {
+    display: block;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+    color: #344054;
+    margin-top: 8px;
+}
+
+.suggestion-mini {
+    background: #fff7ed;
+    color: #9a3412;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 13px;
+    margin-top: 12px;
+}
+
+/* ─── Meals page ─────────────────────────────────────────────────── */
+.empty-state {
+    text-align: center;
+    padding: 30px;
+    color: #667085;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+.filter-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-box label {
+    font-weight: 600;
+    color: #344054;
+    white-space: nowrap;
+}
+
+.filter-box input { width: 160px; margin: 0; }
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.table th, .table td {
+    padding: 12px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+}
+
+.small-btn { padding: 7px 10px; margin-right: 5px; }
+.delete-btn { background: #ef4444; color: white; }
+.edit-btn   { background: #eab308; color: white; }
+.save-btn   { background: #4f9d63; color: white; }
+
+/* ─── Goals page ─────────────────────────────────────────────────── */
+.goals-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    align-items: stretch; 
+}
+
+.profile-form-card label {
+    display: block;
+    margin-top: 10px;
+    font-weight: 600;
+    color: #344054;
+}
+
+.progress-tracking-card img {
+    width: 100%;
+    max-height: 180px;
+    object-fit: contain;
+    margin-bottom: 12px;
+}
+
+/* Weight entry row */
+.weight-entry-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 14px;
+    align-items: start;
+    margin-bottom: 10px;
+}
+
+/* ─── Profile page ───────────────────────────────────────────────── */
+.profile-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    align-items: stretch; 
+}
+
+.profile-layout .card {
+    justify-content: flex-start;
+}
+
+.profile-img {
+    width: 100%;
+    max-height: 140px; 
+    object-fit: contain;
+    margin-bottom: 16px;
+}
+
+.health-metric {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f0fdf4;
+    padding: 12px 16px; 
+    border-radius: 12px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.health-metric strong { color: #2f7d46; font-size: 18px; }
+
+.suggestion-box {
+    margin-top: auto; 
+    padding: 14px;
+    background: #fff7ed;
+    border-left: 5px solid #f97316;
+    border-radius: 12px;
+    color: #9a3412;
+    line-height: 1.5;
+    font-size: 13px;
+}
+
+/* ─── Reports page ───────────────────────────────────────────────── */
+/* ─── Reports page ───────────────────────────────────────────────── */
+.report-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    align-items: stretch;
+}
+
+.report-card {
+    min-height: 150px;
+    padding: 18px 20px;
+}
+
+.report-card h3 {
+    font-size: 17px;
+    margin-bottom: 12px;
+    color: #102a43;
+}
+
+.report-card p {
+    margin: 8px 0;
+    font-size: 14px;
+}
+
+.report-main-number {
+    font-size: 34px;
+    font-weight: 800;
+    color: #2f7d46;
+    margin: 8px 0;
+}
+
+.report-wide-card {
+    grid-column: span 2;
+}
+
+.report-compact-list {
+    display: grid;
+    gap: 8px;
+}
+
+.report-row {
+    display: flex;
+    justify-content: space-between;
+    background: #f0fdf4;
+    padding: 9px 12px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.report-row strong {
+    color: #2f7d46;
+}
+
+.report-date-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    border-radius: 14px;
+    padding: 10px 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.07);
+    gap: 12px;
+}
+
+.date-nav-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+}
+
+.report-date-label {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1f2933;
+}
+
+.today-badge {
+    display: inline-block;
+    background: #dcfce7;
+    color: #166534;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 600;
+    margin-left: 6px;
+}
+
+.date-jump-select {
+    width: auto;
+    padding: 6px 10px;
+    margin: 0;
+    font-size: 13px;
+    border-radius: 8px;
+    color: #344054;
+}
+
+.nav-arrow-btn {
+    background: #f0fdf4;
+    color: #2f7d46;
+    border: 1px solid #bbf7d0;
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.nav-arrow-btn:hover:not(:disabled) {
+    background: #dcfce7;
+}
+
+.nav-arrow-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+@media (max-width: 1100px) {
+    .report-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .report-wide-card {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 700px) {
+    .report-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* ─── Misc shared ─────────────────────────────────────────────────── */
+.warning {
+    background: #fff4e6;
+    color: #9a3412;
+    border-left: 5px solid #f97316;
+}
