@@ -9,6 +9,8 @@ const authRoutes = require("./routes/authRoutes");
 const mealRoutes = require("./routes/mealRoutes");
 const goalRoutes = require("./routes/goalRoutes");
 const reportRoutes = require("./routes/reportRoutes");
+const profileRoutes = require("./routes/profileRoutes");
+const waterRoutes = require("./routes/waterRoutes");
 const authMiddleware = require("./middleware/authMiddleware");
 
 const {
@@ -33,6 +35,9 @@ app.use("/api/auth", authRoutes);
 app.use("/api/meals", mealRoutes);
 app.use("/api/goals", goalRoutes);
 app.use("/api/reports", reportRoutes);
+app.use("/api/profile", profileRoutes);
+app.use("/api/water", waterRoutes);
+
 
 app.get("/api/protected", authMiddleware, (req, res) => {
     res.json({

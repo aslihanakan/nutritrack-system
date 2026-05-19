@@ -18,7 +18,11 @@ async function addWater(req, res) {
             });
         }
 
-        const water = await addWaterLog(req.user.id, amountMl, logDate);
+        const water = await addWaterLog(
+            req.user.id,
+            amountMl,
+            logDate
+        );
 
         res.status(201).json({
             message: "Water log added successfully",
@@ -36,7 +40,10 @@ async function getWaterSummary(req, res) {
     try {
         const date = req.query.date || getTodayDate();
 
-        const summary = await getTodayWater(req.user.id, date);
+        const summary = await getTodayWater(
+            req.user.id,
+            date
+        );
 
         res.status(200).json({
             date,
