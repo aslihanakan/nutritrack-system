@@ -3,6 +3,10 @@ const {
     saveGoal
 } = require("../services/goalService");
 
+const {
+    validateGoal
+} = require("../utils/validation");
+
 async function getGoal(req, res) {
     try {
         const goal = await getGoalByUser(req.user.id);
@@ -24,6 +28,15 @@ async function getGoal(req, res) {
 
 async function updateGoal(req, res) {
     try {
+
+        const validationError = validateGoal(req.body);
+
+        if (validationError) {
+            return res.status(400).json({
+                message: validationError
+            });
+        }
+
         const goal = await saveGoal(req.user.id, req.body);
 
         res.status(200).json({

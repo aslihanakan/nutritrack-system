@@ -3,6 +3,10 @@ const {
     saveProfile
 } = require("../services/profileService");
 
+const {
+    validateProfile
+} = require("../utils/validation");
+
 async function getProfile(req, res) {
     try {
         const profile = await getProfileByUser(req.user.id);
@@ -24,6 +28,15 @@ async function getProfile(req, res) {
 
 async function updateProfile(req, res) {
     try {
+
+        const validationError = validateProfile(req.body);
+
+        if (validationError) {
+            return res.status(400).json({
+                message: validationError
+            });
+        }
+
         const profile = await saveProfile(req.user.id, req.body);
 
         res.status(200).json({

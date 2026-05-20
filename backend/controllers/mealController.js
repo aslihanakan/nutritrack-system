@@ -1,9 +1,13 @@
 const {
     getMealsByUser,
     createMeal,
-    updateMeal, // Servisten gelen metot ismi olarak kalıyor
+    updateMeal,
     deleteMeal
 } = require("../services/mealService");
+
+const {
+    validateMeal
+} = require("../utils/validation");
 
 async function getMeals(req, res) {
     try {
@@ -25,6 +29,14 @@ async function addMeal(req, res) {
             meal_date: req.body.meal_date || today
         };
 
+        const validationError = validateMeal(mealData);
+
+        if (validationError) {
+            return res.status(400).json({
+                message: validationError
+            });
+        }
+
         const meal = await createMeal(req.user.id, mealData);
 
         res.status(201).json({
@@ -39,9 +51,16 @@ async function addMeal(req, res) {
     }
 }
 
-// Güncelleme işlemini yapan asıl fonksiyonun bu
 async function editMeal(req, res) {
     try {
+        const validationError = validateMeal(req.body);
+
+        if (validationError) {
+            return res.status(400).json({
+                message: validationError
+            });
+        }
+
         const result = await updateMeal(
             req.user.id,
             req.params.id,
@@ -73,11 +92,9 @@ async function removeMeal(req, res) {
     }
 }
 
-// NOT: En alttaki hatalı "async function updateMeal" bloğu tamamen kaldırıldı.
-
 module.exports = {
     getMeals,
     addMeal,
-    editMeal, // Routes dosyasında update işlemi için bu ismi çağıracaksın
+    editMeal,
     removeMeal
 };
