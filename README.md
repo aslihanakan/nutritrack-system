@@ -1,212 +1,167 @@
-# NutriTrack 🌿
+<div align="center">
 
-A full-stack diet and health tracking web application built with Node.js, Express, SQLite, and Vanilla JavaScript.  
-Developed as a System Analysis and Design course project.
+# 🌿 NutriTrack
 
----
+### Smart Diet & Health Tracking Web Application
 
-# Table of Contents
-
-- [Overview](#overview)
-- [System Workflow](#system-workflow)
-- [Key Functionalities](#key-functionalities)
-- [Frontend Features](#frontend-features)
-- [Security Features](#security-features)
-- [Tech Stack](#tech-stack)
-- [Project Architecture](#project-architecture)
-- [Project Structure](#project-structure)
-- [Business Logic Layer](#business-logic-layer)
-- [Testing Strategy](#testing-strategy)
-- [Getting Started](#getting-started)
-- [Environment Variables](#environment-variables)
-- [Running the Application](#running-the-application)
-- [Running Tests](#running-tests)
-- [Swagger API Documentation](#swagger-api-documentation)
-- [API Reference](#api-reference)
+<p align="center">
+Track your meals, calories, nutrition goals, water intake, and weight progress in one modern dashboard.
+</p>
 
 ---
 
-# Overview
+![Node.js](https://img.shields.io/badge/Node.js-18+-green?style=for-the-badge&logo=node.js)
+![Express](https://img.shields.io/badge/Express.js-Backend-black?style=for-the-badge&logo=express)
+![SQLite](https://img.shields.io/badge/SQLite-Database-blue?style=for-the-badge&logo=sqlite)
+![JWT](https://img.shields.io/badge/JWT-Authentication-orange?style=for-the-badge)
+![Swagger](https://img.shields.io/badge/Swagger-API%20Docs-brightgreen?style=for-the-badge&logo=swagger)
+![Jest](https://img.shields.io/badge/Jest-Testing-red?style=for-the-badge&logo=jest)
 
-NutriTrack is a modern single-page health and nutrition tracking application where users can monitor their daily meals, calorie intake, water consumption, nutrition goals, and weight progress.
-
-The system provides a responsive dashboard interface that dynamically calculates nutrition summaries and health statistics in real time.
-
-The application was designed using a layered backend architecture including:
-
-- Controllers
-- Services
-- Middleware
-- Validation utilities
-- REST API routes
-
-All frontend-backend communication happens asynchronously using the Fetch API without page reloads.
+</div>
 
 ---
 
-# System Workflow
+# 📌 Overview
 
-The system is designed as a health and nutrition tracking platform where users manage their lifestyle data through a modern SPA interface.
+NutriTrack is a full-stack Single Page Application (SPA) developed for the **System Analysis and Design** course.
 
-## User Workflow
+The project helps users maintain a healthier lifestyle by tracking:
 
-### 1. Authentication
-Users register and log into the system securely using JWT authentication.
+- Daily meals
+- Calories
+- Macronutrients
+- Water intake
+- Weight progress
+- Nutrition goals
+- Health statistics
 
-### 2. Meal Tracking
+The application uses a layered backend architecture with REST APIs and dynamic frontend rendering using Vanilla JavaScript.
+
+---
+
+# ✨ Main Features
+
+## 🔐 Authentication System
+- User registration
+- User login
+- JWT token authentication
+- Protected API routes
+
+---
+
+## 🥗 Meal Tracking
 Users can:
 - Add meals
-- Edit meals
+- Update meals
 - Delete meals
 - View nutrition summaries
 
-Each meal stores:
+Each meal includes:
+- Meal type
 - Calories
 - Protein
-- Carbohydrates
-- Fat values
-- Meal type
+- Carbs
+- Fat
 - Meal date
 
-### 3. Goal Management
-Users define:
+---
+
+## 🎯 Goal Management
+Users can define:
 - Daily calorie goals
 - Protein goals
 - Carbohydrate goals
 - Fat goals
-- Water intake goals
+- Water goals
 
-The system compares current consumption with target goals dynamically.
+The system dynamically tracks progress toward these goals.
 
-### 4. Health Profile Analysis
-Users can save personal health information such as:
-- Age
-- Height
-- Weight
-- Activity level
-- Target weight
+---
 
+## 📊 Nutrition Analytics
+Automatic calculations for:
+- Daily calorie intake
+- Protein totals
+- Carb totals
+- Fat totals
+- Remaining calories
+- Nutrition summaries
+
+---
+
+## 💧 Water Tracking
+Users can:
+- Log daily water intake
+- Track hydration progress
+- Compare intake with target goals
+
+---
+
+## ⚖️ Weight Tracking
+Monthly weight tracking system including:
+- Weight history
+- Progress calculations
+- Goal tracking
+- Progress percentage visualization
+
+---
+
+## 🧠 Health Calculations
 The system automatically calculates:
 - BMI
 - BMI status
 - Ideal weight range
 - Daily calorie needs
 
-### 5. Water Tracking
-Users can log daily water consumption and monitor hydration progress.
+---
 
-### 6. Weight Progress Monitoring
-The application includes monthly weight tracking with:
-- Weight history
-- Progress visualization
-- Target tracking
-- Progress percentage calculations
+## 📑 Swagger API Documentation
+Interactive API documentation using Swagger UI.
 
-### 7. Reporting System
-The Reports page aggregates user data and generates:
-- Nutrition summaries
-- Daily reports
-- Macro tracking
-- Health summaries
-- Weight tracking statistics
-
-### 8. REST API & Swagger
-All API endpoints are documented and testable using Swagger UI.
+Users can:
+- Test endpoints
+- Send requests
+- Authenticate with JWT
+- View responses directly
 
 ---
 
-# Key Functionalities
+# 🏗️ System Architecture
 
-## Smart Nutrition Tracking
-The system automatically calculates total calorie and macronutrient intake based on user meal entries.
-
-## Health Analysis
-BMI, daily calorie need, and ideal weight calculations are generated automatically using health formulas.
-
-## Dynamic Goal Progress
-Animated progress bars display how close users are to reaching their nutrition goals.
-
-## Weight Tracking System
-Users can record monthly weight logs and monitor progress toward their target weight.
-
-## JWT Authentication
-Protected endpoints require valid JWT tokens for secure access.
-
-## RESTful API Design
-The backend follows REST architecture principles using Express routes and controllers.
-
-## Interactive API Documentation
-Swagger UI allows direct API testing from the browser.
-
----
-
-# Frontend Features
-
-- Responsive dashboard layout
-- SPA navigation without page reloads
-- Dynamic nutrition summaries
-- Live goal progress tracking
-- Weight history tables
-- Monthly weight tracking
-- Daily report system
-- Interactive cards and progress bars
-- Modern card-based UI
-- Real-time dashboard updates
-
----
-
-# Security Features
-
-- JWT-based authentication
-- Password hashing using bcryptjs
-- Protected API routes
-- Input validation
-- Unauthorized access prevention
-- Secure middleware-based authentication flow
-
----
-
-# Tech Stack
-
-| Layer | Technology |
-|---|---|
-| Backend | Node.js, Express 5 |
-| Database | SQLite3 |
-| Authentication | JWT, bcryptjs |
-| Frontend | Vanilla JavaScript, HTML5, CSS3 |
-| API Documentation | Swagger UI |
-| Testing | Jest |
-| Environment Config | dotenv |
-
----
-
-# Project Architecture
-
-The project follows a layered architecture structure:
-
-## Backend Layers
-
-### Controllers
-Handle incoming HTTP requests and responses.
-
-### Services
-Contain business logic and database operations.
-
-### Middleware
-Authentication and request protection.
-
-### Validation Utilities
-Input validation and data verification.
-
-### Routes
-REST API endpoint definitions.
-
----
-
-# Project Structure
+The project follows a layered architecture:
 
 ```text
-nutritrack-system/
+Frontend (SPA)
+       ↓
+REST API Routes
+       ↓
+Controllers
+       ↓
+Services (Business Logic)
+       ↓
+SQLite Database
+```
+
+---
+
+# 🧩 Technologies Used
+
+| Category | Technologies |
+|---|---|
+| Backend | Node.js, Express.js |
+| Frontend | HTML5, CSS3, Vanilla JavaScript |
+| Database | SQLite3 |
+| Authentication | JWT, bcryptjs |
+| API Documentation | Swagger UI |
+| Testing | Jest |
+| Environment Variables | dotenv |
+
+---
+
+# 📁 Project Structure
+
+```text
+nnutritrack-system/
 │
 ├── backend/
 │   │
@@ -285,78 +240,71 @@ nutritrack-system/
 
 ---
 
-# Business Logic Layer
-
-The project contains multiple business logic modules implemented inside the `services/` layer.
+# 🧠 Business Logic Modules
 
 | Service | Responsibility |
 |---|---|
-| authService.js | Authentication and JWT generation |
+| authService.js | Authentication & JWT |
 | mealService.js | Meal CRUD operations |
 | goalService.js | Goal management |
 | profileService.js | User profile management |
-| nutritionService.js | Nutrition summary calculations |
-| healthService.js | BMI and calorie calculations |
-| waterService.js | Water tracking logic |
+| nutritionService.js | Nutrition calculations |
+| healthService.js | BMI & calorie calculations |
+| waterService.js | Water tracking |
 
 ---
 
-# Testing Strategy
+# 🧪 Testing
 
-The application was tested using Jest unit tests with mocked database operations.
+The application includes unit testing using Jest.
 
-## Test Coverage Includes
+## ✔ Test Coverage
 
 - Authentication logic
-- CRUD operations
 - Validation functions
-- Health calculations
-- Nutrition summaries
-- Error handling scenarios
-- Goal management
+- Meal operations
+- Goal operations
 - Water tracking
-
-Mocked database calls were used to isolate business logic from persistence logic during testing.
-
----
-
-# Getting Started
-
-## Prerequisites
-
-- Node.js v18+
-- npm
+- BMI calculations
+- Nutrition calculations
+- Error handling scenarios
 
 ---
 
-# Installation
+# 📸 Application Modules
 
-Clone the repository:
+| Module | Description |
+|---|---|
+| Dashboard | Main health overview |
+| Meals | Meal CRUD management |
+| Goals | Nutrition goals & progress |
+| Profile | Health profile management |
+| Reports | Nutrition summaries & analytics |
+
+---
+
+# 🚀 Getting Started
+
+## 1️⃣ Clone Repository
 
 ```bash
 git clone https://github.com/your-username/nutritrack-system.git
 ```
 
-Move into the project folder:
+---
+
+## 2️⃣ Install Dependencies
 
 ```bash
-cd nutritrack-system
-```
-
-Install backend dependencies:
-
-```bash
-cd backend
+cd nutritrack-system/backend
 npm install
 ```
 
-No frontend dependency installation is required because the frontend uses Vanilla JavaScript.
-
 ---
 
-# Environment Variables
+## 3️⃣ Create Environment File
 
-Create a `.env` file inside the `backend/` folder:
+Create `.env` inside `backend/`
 
 ```env
 PORT=5000
@@ -365,9 +313,7 @@ JWT_SECRET=your_secret_key
 
 ---
 
-# Running the Application
-
-Inside the backend folder:
+## 4️⃣ Start Application
 
 ```bash
 npm start
@@ -381,25 +327,43 @@ npm run dev
 
 ---
 
-# Application URLs
+# 🌐 Application URLs
 
 | URL | Description |
 |---|---|
 | http://localhost:5000 | Frontend Application |
 | http://localhost:5000/api-docs | Swagger UI |
-| http://localhost:5000/api/status | API Status Endpoint |
+| http://localhost:5000/api/status | API Status |
 
 ---
 
-# Running Tests
+# 🔑 Swagger Authorization
 
-Inside the backend folder:
+1. Login using:
+
+```text
+POST /api/auth/login
+```
+
+2. Copy JWT token
+
+3. Click **Authorize** in Swagger UI
+
+4. Paste token:
+
+```text
+Bearer your_token_here
+```
+
+---
+
+# 🧪 Run Tests
 
 ```bash
 npm test
 ```
 
-Expected output:
+Expected result:
 
 ```text
 Test Suites: 8 passed, 8 total
@@ -408,112 +372,64 @@ Tests:       57 passed, 57 total
 
 ---
 
-# Swagger API Documentation
-
-The project includes interactive API documentation using Swagger UI.
-
-Swagger allows testing all endpoints directly from the browser.
-
-## Swagger Features
-
-- Interactive API testing
-- JWT authorization support
-- Request/response examples
-- Protected route testing
-- REST endpoint documentation
-
-## Swagger URL
-
-```text
-http://localhost:5000/api-docs
-```
-
-## JWT Authorization in Swagger
-
-1. Register or login using:
-   - `/api/auth/register`
-   - `/api/auth/login`
-
-2. Copy the JWT token returned from login.
-
-3. Click the **Authorize** button in Swagger UI.
-
-4. Paste the token in this format:
-
-```text
-Bearer your_token_here
-```
-
-5. Protected endpoints can now be tested directly.
-
----
-
-# API Reference
+# 📡 API Endpoints
 
 ## Authentication
-
-### POST `/api/auth/register`
-Register a new user.
-
-### POST `/api/auth/login`
-Login and receive JWT token.
+- `POST /api/auth/register`
+- `POST /api/auth/login`
 
 ---
 
 ## Meals
-
-### GET `/api/meals`
-Get all meals for the logged-in user.
-
-### POST `/api/meals`
-Add a new meal.
-
-### PUT `/api/meals/:id`
-Update a meal.
-
-### DELETE `/api/meals/:id`
-Delete a meal.
+- `GET /api/meals`
+- `POST /api/meals`
+- `PUT /api/meals/:id`
+- `DELETE /api/meals/:id`
 
 ---
 
 ## Goals
-
-### GET `/api/goals`
-Get daily goals.
-
-### POST `/api/goals`
-Save or update goals.
+- `GET /api/goals`
+- `POST /api/goals`
 
 ---
 
 ## Profile
-
-### GET `/api/profile`
-Get health profile.
-
-### POST `/api/profile`
-Save or update health profile.
+- `GET /api/profile`
+- `POST /api/profile`
 
 ---
 
 ## Water
-
-### POST `/api/water`
-Add water intake entry.
-
-### GET `/api/water/today`
-Get daily water total.
+- `POST /api/water`
+- `GET /api/water/today`
 
 ---
 
 ## Reports
-
-### GET `/api/reports/summary`
-Get nutrition summary report.
+- `GET /api/reports/summary`
 
 ---
 
-# Author
+# 🎯 SPA Structure
 
-Developed by Aslıhan Akan  
+NutriTrack is implemented as a Single Page Application (SPA).
+
+The application dynamically renders pages using JavaScript without refreshing the browser.
+
+Main SPA modules:
+- Dashboard
+- Meals
+- Goals
+- Profile
+- Reports
+
+---
+
+# 👩‍💻 Author
+
+### Aslıhan Akan
+
 System Analysis and Design Project
+
+---
