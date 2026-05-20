@@ -372,43 +372,60 @@ Tests:       57 passed, 57 total
 
 ---
 
-# 📡 API Endpoints
+# 🌐 REST API Endpoints
 
 ## Authentication
-- `POST /api/auth/register`
-- `POST /api/auth/login`
+
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/auth/register` | Register new user |
+| POST | `/api/auth/login` | Login and receive JWT token |
 
 ---
 
 ## Meals
-- `GET /api/meals`
-- `POST /api/meals`
-- `PUT /api/meals/:id`
-- `DELETE /api/meals/:id`
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/meals` | Get all meals of logged-in user |
+| POST | `/api/meals` | Create new meal |
+| PUT | `/api/meals/:id` | Update existing meal |
+| DELETE | `/api/meals/:id` | Delete meal |
 
 ---
 
 ## Goals
-- `GET /api/goals`
-- `POST /api/goals`
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/goals` | Get daily nutrition and water goals |
+| POST | `/api/goals` | Create or update daily goals |
 
 ---
 
 ## Profile
-- `GET /api/profile`
-- `POST /api/profile`
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/profile` | Get user health profile |
+| POST | `/api/profile` | Create or update health profile |
 
 ---
 
 ## Water
-- `POST /api/water`
-- `GET /api/water/today`
+
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/water` | Log water intake |
+| GET | `/api/water/today` | Get today's total water intake |
 
 ---
 
 ## Reports
-- `GET /api/reports/summary`
 
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/reports/summary` | Get all-time nutrition summary |
 ---
 
 # 🎯 SPA Structure
