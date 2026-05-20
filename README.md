@@ -1,94 +1,168 @@
 # NutriTrack 🌿
 
-A full-stack diet and health tracking web application built with Node.js, Express, SQLite, and Vanilla JavaScript. Developed as a System Analysis and Design course project.
+A full-stack diet and health tracking web application built with Node.js, Express, SQLite, and Vanilla JavaScript.  
+Developed as a System Analysis and Design course project.
 
 ---
 
 # Table of Contents
 
 - [Overview](#overview)
-- [Features](#features)
+- [System Workflow](#system-workflow)
+- [Key Functionalities](#key-functionalities)
+- [Frontend Features](#frontend-features)
+- [Security Features](#security-features)
 - [Tech Stack](#tech-stack)
-- [System Architecture](#system-architecture)
+- [Project Architecture](#project-architecture)
 - [Project Structure](#project-structure)
-- [Business Logic](#business-logic)
+- [Business Logic Layer](#business-logic-layer)
+- [Testing Strategy](#testing-strategy)
 - [Getting Started](#getting-started)
 - [Environment Variables](#environment-variables)
 - [Running the Application](#running-the-application)
 - [Running Tests](#running-tests)
 - [Swagger API Documentation](#swagger-api-documentation)
 - [API Reference](#api-reference)
-- [Future Improvements](#future-improvements)
-- [Developer](#developer)
 
 ---
 
 # Overview
 
-NutriTrack is a single-page application (SPA) designed to help users maintain a healthier lifestyle by tracking meals, nutrition values, hydration, and body progress.
+NutriTrack is a modern single-page health and nutrition tracking application where users can monitor their daily meals, calorie intake, water consumption, nutrition goals, and weight progress.
 
-The system allows users to:
+The system provides a responsive dashboard interface that dynamically calculates nutrition summaries and health statistics in real time.
 
-- Track daily meals
-- Monitor calories and macronutrients
-- Set nutrition goals
-- Track water intake
-- Calculate BMI and daily calorie needs
-- Monitor weight changes over time
-- View health summaries and reports
+The application was designed using a layered backend architecture including:
 
-All frontend-backend communication is handled asynchronously using the Fetch API without page reloads.
+- Controllers
+- Services
+- Middleware
+- Validation utilities
+- REST API routes
+
+All frontend-backend communication happens asynchronously using the Fetch API without page reloads.
 
 ---
 
-# Features
+# System Workflow
 
-## Authentication
-- User registration
-- Secure login system
-- JWT-based authentication
-- Protected API routes
+The system is designed as a health and nutrition tracking platform where users manage their lifestyle data through a modern SPA interface.
 
-## Meal Management
+## User Workflow
+
+### 1. Authentication
+Users register and log into the system securely using JWT authentication.
+
+### 2. Meal Tracking
+Users can:
 - Add meals
 - Edit meals
 - Delete meals
-- Daily meal history
-- Nutrition tracking
+- View nutrition summaries
 
-## Goal Tracking
+Each meal stores:
+- Calories
+- Protein
+- Carbohydrates
+- Fat values
+- Meal type
+- Meal date
+
+### 3. Goal Management
+Users define:
 - Daily calorie goals
 - Protein goals
 - Carbohydrate goals
 - Fat goals
 - Water intake goals
-- Live progress bars
 
-## Health Profile
-- BMI calculation
-- BMI status evaluation
-- Ideal weight range estimation
-- Daily calorie need calculation
-- Personalized suggestions
+The system compares current consumption with target goals dynamically.
 
-## Weight Tracking
-- Monthly weight logs
-- Weight history table
-- Goal progress tracking
-- Target weight comparison
+### 4. Health Profile Analysis
+Users can save personal health information such as:
+- Age
+- Height
+- Weight
+- Activity level
+- Target weight
 
-## Reports
-- Daily nutrition reports
+The system automatically calculates:
+- BMI
+- BMI status
+- Ideal weight range
+- Daily calorie needs
+
+### 5. Water Tracking
+Users can log daily water consumption and monitor hydration progress.
+
+### 6. Weight Progress Monitoring
+The application includes monthly weight tracking with:
+- Weight history
+- Progress visualization
+- Target tracking
+- Progress percentage calculations
+
+### 7. Reporting System
+The Reports page aggregates user data and generates:
 - Nutrition summaries
+- Daily reports
 - Macro tracking
-- Water consumption overview
+- Health summaries
+- Weight tracking statistics
 
-## API & Testing
-- Swagger UI integration
-- RESTful API structure
-- Unit tests with Jest
+### 8. REST API & Swagger
+All API endpoints are documented and testable using Swagger UI.
+
+---
+
+# Key Functionalities
+
+## Smart Nutrition Tracking
+The system automatically calculates total calorie and macronutrient intake based on user meal entries.
+
+## Health Analysis
+BMI, daily calorie need, and ideal weight calculations are generated automatically using health formulas.
+
+## Dynamic Goal Progress
+Animated progress bars display how close users are to reaching their nutrition goals.
+
+## Weight Tracking System
+Users can record monthly weight logs and monitor progress toward their target weight.
+
+## JWT Authentication
+Protected endpoints require valid JWT tokens for secure access.
+
+## RESTful API Design
+The backend follows REST architecture principles using Express routes and controllers.
+
+## Interactive API Documentation
+Swagger UI allows direct API testing from the browser.
+
+---
+
+# Frontend Features
+
+- Responsive dashboard layout
+- SPA navigation without page reloads
+- Dynamic nutrition summaries
+- Live goal progress tracking
+- Weight history tables
+- Monthly weight tracking
+- Daily report system
+- Interactive cards and progress bars
+- Modern card-based UI
+- Real-time dashboard updates
+
+---
+
+# Security Features
+
+- JWT-based authentication
+- Password hashing using bcryptjs
+- Protected API routes
 - Input validation
-- Error handling
+- Unauthorized access prevention
+- Secure middleware-based authentication flow
 
 ---
 
@@ -97,39 +171,35 @@ All frontend-backend communication is handled asynchronously using the Fetch API
 | Layer | Technology |
 |---|---|
 | Backend | Node.js, Express 5 |
-| Database | SQLite (sqlite3) |
+| Database | SQLite3 |
 | Authentication | JWT, bcryptjs |
 | Frontend | Vanilla JavaScript, HTML5, CSS3 |
 | API Documentation | Swagger UI |
 | Testing | Jest |
-| Architecture | SPA + REST API |
+| Environment Config | dotenv |
 
 ---
 
-# System Architecture
+# Project Architecture
 
 The project follows a layered architecture structure:
 
-```text
-Frontend (SPA)
-       ↓
-Controllers
-       ↓
-Services (Business Logic)
-       ↓
-Database Layer (SQLite)
-```
+## Backend Layers
 
-### Layer Responsibilities
+### Controllers
+Handle incoming HTTP requests and responses.
 
-| Layer | Responsibility |
-|---|---|
-| Frontend | User interface and interactions |
-| Controllers | HTTP request/response handling |
-| Services | Business logic and calculations |
-| Database | Data persistence |
-| Middleware | Authentication and security |
-| Utils | Validation and helper functions |
+### Services
+Contain business logic and database operations.
+
+### Middleware
+Authentication and request protection.
+
+### Validation Utilities
+Input validation and data verification.
+
+### Routes
+REST API endpoint definitions.
 
 ---
 
@@ -137,78 +207,116 @@ Database Layer (SQLite)
 
 ```text
 nutritrack-system/
+│
 ├── backend/
+│   │
 │   ├── controllers/
 │   │   ├── authController.js
-│   │   ├── mealController.js
 │   │   ├── goalController.js
+│   │   ├── mealController.js
 │   │   ├── profileController.js
-│   │   ├── waterController.js
-│   │   └── reportController.js
+│   │   ├── reportController.js
+│   │   └── waterController.js
+│   │
+│   ├── middleware/
+│   │   └── authMiddleware.js
+│   │
+│   ├── routes/
+│   │   ├── authRoutes.js
+│   │   ├── goalRoutes.js
+│   │   ├── mealRoutes.js
+│   │   ├── profileRoutes.js
+│   │   ├── reportRoutes.js
+│   │   └── waterRoutes.js
 │   │
 │   ├── services/
 │   │   ├── authService.js
-│   │   ├── mealService.js
 │   │   ├── goalService.js
-│   │   ├── profileService.js
 │   │   ├── healthService.js
+│   │   ├── mealService.js
 │   │   ├── nutritionService.js
+│   │   ├── profileService.js
 │   │   └── waterService.js
 │   │
-│   ├── routes/
-│   ├── middleware/
-│   ├── utils/
 │   ├── tests/
+│   │   ├── authService.test.js
+│   │   ├── goalService.test.js
+│   │   ├── healthService.test.js
+│   │   ├── mealService.test.js
+│   │   ├── nutritionService.test.js
+│   │  ├── profileService.test.js
+│   │   ├── validation.test.js
+│   │   └── waterService.test.js
+│   │
+│   ├── utils/
+│   │   └── validation.js
+│   │
 │   ├── database.js
-│   ├── swagger.js
+│   ├── nutritrack.db
+│   ├── package.json
+│   ├── package-lock.json
 │   ├── server.js
+│   ├── swagger.js
 │   └── .env
 │
-└── frontend/
-    ├── index.html
-    ├── css/
-    ├── js/
-    │   ├── api.js
-    │   ├── app.js
-    │   ├── auth.js
-    │   ├── dashboard.js
-    │   ├── meals.js
-    │   ├── goals.js
-    │   ├── profile.js
-    │   ├── reports.js
-    │   └── utils.js
-    └── assets/
+├── frontend/
+│   │
+│   ├── assets/
+│   │
+│   ├── css/
+│   │   └── style.css
+│   │
+│   ├── js/
+│   │   ├── api.js
+│   │   ├── app.js
+│   │   ├── auth.js
+│   │   ├── dashboard.js
+│   │   ├── goals.js
+│   │   ├── meals.js
+│   │   ├── profile.js
+│   │   ├── reports.js
+│   │   └── utils.js
+│   │
+│   └── index.html
+│
+├── .gitignore
+└── README.md
 ```
 
 ---
 
-# Business Logic
+# Business Logic Layer
 
-The project contains multiple business logic components implemented in the service layer.
+The project contains multiple business logic modules implemented inside the `services/` layer.
 
-## Examples of Business Logic
+| Service | Responsibility |
+|---|---|
+| authService.js | Authentication and JWT generation |
+| mealService.js | Meal CRUD operations |
+| goalService.js | Goal management |
+| profileService.js | User profile management |
+| nutritionService.js | Nutrition summary calculations |
+| healthService.js | BMI and calorie calculations |
+| waterService.js | Water tracking logic |
 
-### Health Calculations
-- BMI calculation
-- BMI category classification
-- Daily calorie need estimation
-- Ideal weight range estimation
+---
 
-### Nutrition Processing
-- Total nutrition summary calculation
-- Daily calorie aggregation
-- Macronutrient tracking
+# Testing Strategy
 
-### Goal Progress Logic
-- Dynamic progress percentage calculations
-- Remaining calorie calculations
-- Weight goal tracking
+The application was tested using Jest unit tests with mocked database operations.
 
-### Validation Rules
-- Input validation
-- Positive number checks
-- Authentication validation
-- Meal type validation
+## Test Coverage Includes
+
+- Authentication logic
+- CRUD operations
+- Validation functions
+- Health calculations
+- Nutrition summaries
+- Error handling scenarios
+- Goal management
+- Water tracking
+
+Mocked database calls were used to isolate business logic from persistence logic during testing.
 
 ---
 
@@ -216,38 +324,33 @@ The project contains multiple business logic components implemented in the servi
 
 ## Prerequisites
 
-Install the following software before running the project:
-
-- Node.js v18 or higher
+- Node.js v18+
 - npm
-
-Download Node.js:
-https://nodejs.org/
 
 ---
 
 # Installation
 
-## 1. Clone the repository
+Clone the repository:
 
 ```bash
-git clone https://github.com/aslihanakan/nutritrack-system.git
+git clone https://github.com/your-username/nutritrack-system.git
 ```
 
-## 2. Open the project folder
+Move into the project folder:
 
 ```bash
 cd nutritrack-system
 ```
 
-## 3. Install backend dependencies
+Install backend dependencies:
 
 ```bash
 cd backend
 npm install
 ```
 
-No frontend dependencies are required because the frontend is built with Vanilla JavaScript.
+No frontend dependency installation is required because the frontend uses Vanilla JavaScript.
 
 ---
 
@@ -257,39 +360,23 @@ Create a `.env` file inside the `backend/` folder:
 
 ```env
 PORT=5000
-JWT_SECRET=your_secret_key_here
+JWT_SECRET=your_secret_key
 ```
-
-| Variable | Description |
-|---|---|
-| PORT | Server port |
-| JWT_SECRET | JWT signing key |
-
-The SQLite database file is created automatically during first execution.
 
 ---
 
 # Running the Application
 
-Inside the `backend/` folder:
-
-## Production
+Inside the backend folder:
 
 ```bash
 npm start
 ```
 
-## Development Mode
+Development mode:
 
 ```bash
 npm run dev
-```
-
-When the server starts successfully:
-
-```text
-Server is running on port 5000
-Database connected
 ```
 
 ---
@@ -299,14 +386,14 @@ Database connected
 | URL | Description |
 |---|---|
 | http://localhost:5000 | Frontend Application |
-| http://localhost:5000/api-docs | Swagger API Documentation |
-| http://localhost:5000/api/status | API Health Check |
+| http://localhost:5000/api-docs | Swagger UI |
+| http://localhost:5000/api/status | API Status Endpoint |
 
 ---
 
 # Running Tests
 
-Inside the `backend/` folder:
+Inside the backend folder:
 
 ```bash
 npm test
@@ -321,100 +408,43 @@ Tests:       57 passed, 57 total
 
 ---
 
-# Test Coverage
-
-| Test File | Description |
-|---|---|
-| authService.test.js | Authentication logic |
-| mealService.test.js | Meal CRUD operations |
-| goalService.test.js | Goal management |
-| profileService.test.js | Profile calculations |
-| nutritionService.test.js | Nutrition summaries |
-| healthService.test.js | BMI and calorie calculations |
-| waterService.test.js | Water tracking |
-| validation.test.js | Validation functions |
-
----
-
 # Swagger API Documentation
 
-Swagger UI is integrated into the project for interactive API testing and documentation.
+The project includes interactive API documentation using Swagger UI.
 
-## Swagger Packages Used
+Swagger allows testing all endpoints directly from the browser.
 
-- swagger-ui-express
-- swagger-jsdoc
+## Swagger Features
 
-## Access Swagger
+- Interactive API testing
+- JWT authorization support
+- Request/response examples
+- Protected route testing
+- REST endpoint documentation
 
-Open:
+## Swagger URL
 
 ```text
 http://localhost:5000/api-docs
 ```
 
----
+## JWT Authorization in Swagger
 
-# Using Swagger Authentication
+1. Register or login using:
+   - `/api/auth/register`
+   - `/api/auth/login`
 
-Most endpoints are protected using JWT Bearer Authentication.
+2. Copy the JWT token returned from login.
 
-## Step 1 — Register
+3. Click the **Authorize** button in Swagger UI.
 
-Use:
-
-```http
-POST /api/auth/register
-```
-
-Create a new account.
-
----
-
-## Step 2 — Login
-
-Use:
-
-```http
-POST /api/auth/login
-```
-
-Example request:
-
-```json
-{
-  "email": "aslihan@example.com",
-  "password": "123456"
-}
-```
-
-Example response:
-
-```json
-{
-  "token": "jwt_token_here"
-}
-```
-
----
-
-## Step 3 — Copy Token
-
-Copy the JWT token returned from the login endpoint.
-
----
-
-## Step 4 — Authorize
-
-Click the **Authorize** button in Swagger UI.
-
-Enter the token like this:
+4. Paste the token in this format:
 
 ```text
 Bearer your_token_here
 ```
 
-After authorization, protected endpoints can be tested directly from Swagger UI.
+5. Protected endpoints can now be tested directly.
 
 ---
 
@@ -422,86 +452,68 @@ After authorization, protected endpoints can be tested directly from Swagger UI.
 
 ## Authentication
 
-### POST /api/auth/register
-
+### POST `/api/auth/register`
 Register a new user.
 
-### POST /api/auth/login
-
+### POST `/api/auth/login`
 Login and receive JWT token.
 
 ---
 
 ## Meals
 
-### GET /api/meals
-Get all meals.
+### GET `/api/meals`
+Get all meals for the logged-in user.
 
-### POST /api/meals
-Create a new meal.
+### POST `/api/meals`
+Add a new meal.
 
-### PUT /api/meals/:id
+### PUT `/api/meals/:id`
 Update a meal.
 
-### DELETE /api/meals/:id
+### DELETE `/api/meals/:id`
 Delete a meal.
 
 ---
 
 ## Goals
 
-### GET /api/goals
-Get nutrition goals.
+### GET `/api/goals`
+Get daily goals.
 
-### POST /api/goals
-Save nutrition goals.
+### POST `/api/goals`
+Save or update goals.
 
 ---
 
 ## Profile
 
-### GET /api/profile
+### GET `/api/profile`
 Get health profile.
 
-### POST /api/profile
-Save health profile.
+### POST `/api/profile`
+Save or update health profile.
 
 ---
 
 ## Water
 
-### POST /api/water
-Add water log.
+### POST `/api/water`
+Add water intake entry.
 
-### GET /api/water/today
-Get today's water total.
+### GET `/api/water/today`
+Get daily water total.
 
 ---
 
 ## Reports
 
-### GET /api/reports/summary
+### GET `/api/reports/summary`
 Get nutrition summary report.
 
 ---
 
-# Future Improvements
+# Author
 
-Possible future enhancements:
-
-- Chart.js integration
-- Weekly and monthly analytics
-- Mobile responsive optimization
-- Cloud deployment
-- User profile pictures
-- Email verification
-- Export reports as PDF
-- AI-based nutrition suggestions
-
----
-
-# Developer
-
-**Aslıhan Akan**
-
-System Analysis and Design Project — 2026
+Developed by Aslıhan Akan  
+System Analysis and Design Project
