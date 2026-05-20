@@ -426,7 +426,7 @@ Main SPA modules:
 
 ---
 
-# 👩‍💻 Author
+# 🧕🏼 Author
 
 ### Aslıhan Akan
 
