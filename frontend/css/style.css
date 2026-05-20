@@ -239,7 +239,7 @@ button {
     flex-direction: row !important; /* Alt alta dizilmeyi önler, yan yana alır */
     justify-content: space-between;
     align-items: center;
-    padding: 12px 20px;    
+    padding: 10px 20px;    
     margin-bottom: 14px;   
     background: linear-gradient(135deg, #ffffff, #f0fdf4);
     border-radius: 16px;
@@ -271,6 +271,7 @@ button {
     object-fit: contain;
     margin: 0 0 0 15px;
 }
+
 
 /* ═══════════════════════════════════════════════════════════════════
    DASHBOARD  ─  3 üst kart yan yana, tam genişlik
@@ -642,8 +643,6 @@ button {
     line-height: 1.5;
     font-size: 13px;
 }
-
-/* ─── Reports page ───────────────────────────────────────────────── */
 /* ─── Reports page ───────────────────────────────────────────────── */
 .report-grid {
     display: grid;
@@ -782,4 +781,27 @@ button {
     background: #fff4e6;
     color: #9a3412;
     border-left: 5px solid #f97316;
+}
+.date-picker-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.date-jump-input {
+    width: 190px;
+    padding: 10px 14px;
+    border: 1.5px solid #d0d5dd;
+    border-radius: 10px;
+    font-size: 14px;
+    background: #fff;
+    color: #344054;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.date-jump-input:focus {
+    border-color: #4f9d63;
+    box-shadow: 0 0 0 4px rgba(79, 157, 99, 0.12);
 }
