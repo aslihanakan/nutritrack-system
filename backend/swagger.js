@@ -7,7 +7,12 @@ const swaggerSpec = {
         version: "1.0.0",
         description: "API documentation for NutriTrack diet tracking system"
     },
-    servers: [{ url: "http://localhost:5000" }],
+   servers: [
+    {
+        url: "http://localhost:5000",
+        description: "Local development server"
+    }
+],
     components: {
         securitySchemes: {
             bearerAuth: {
@@ -18,8 +23,6 @@ const swaggerSpec = {
         }
     },
     paths: {
-
-        // ── AUTH ─────────────────────────────────────────────────────────────
         "/api/auth/register": {
             post: {
                 summary: "Register a new user",
@@ -42,6 +45,7 @@ const swaggerSpec = {
                 }
             }
         },
+
         "/api/auth/login": {
             post: {
                 summary: "Login user and receive JWT token",
@@ -64,7 +68,6 @@ const swaggerSpec = {
             }
         },
 
-        // ── MEALS ─────────────────────────────────────────────────────────────
         "/api/meals": {
             get: {
                 summary: "Get all meals of logged-in user",
@@ -97,11 +100,12 @@ const swaggerSpec = {
                 },
                 responses: {
                     201: { description: "Meal added successfully" },
-                    400: { description: "Missing required fields" },
+                    400: { description: "Missing or invalid meal data" },
                     401: { description: "Unauthorized" }
                 }
             }
         },
+
         "/api/meals/{id}": {
             put: {
                 summary: "Update an existing meal",
@@ -131,8 +135,9 @@ const swaggerSpec = {
                 },
                 responses: {
                     200: { description: "Meal updated successfully" },
-                    404: { description: "Meal not found" },
-                    401: { description: "Unauthorized" }
+                    400: { description: "Invalid meal data" },
+                    401: { description: "Unauthorized" },
+                    404: { description: "Meal not found" }
                 }
             },
             delete: {
@@ -148,13 +153,12 @@ const swaggerSpec = {
                 }],
                 responses: {
                     200: { description: "Meal deleted successfully" },
-                    404: { description: "Meal not found" },
-                    401: { description: "Unauthorized" }
+                    401: { description: "Unauthorized" },
+                    404: { description: "Meal not found" }
                 }
             }
         },
 
-        // ── GOALS ─────────────────────────────────────────────────────────────
         "/api/goals": {
             get: {
                 summary: "Get daily nutrition and water goals",
@@ -185,50 +189,94 @@ const swaggerSpec = {
                 },
                 responses: {
                     200: { description: "Goals saved successfully" },
+                    400: { description: "Missing or invalid goal values" },
                     401: { description: "Unauthorized" }
                 }
             }
         },
-
-        // ── PROFILE ───────────────────────────────────────────────────────────
-        "/api/profile": {
-            get: {
-                summary: "Get user health profile",
-                tags: ["Profile"],
-                security: [{ bearerAuth: [] }],
-                responses: {
-                    200: { description: "Returns BMI, ideal weight range, daily calorie need and suggestion" },
-                    401: { description: "Unauthorized" }
-                }
+"/api/profile": {
+    get: {
+        summary: "Get user health profile",
+        tags: ["Profile"],
+        security: [{ bearerAuth: [] }],
+        responses: {
+            200: {
+                description: "Returns health profile and calculated values"
             },
-            post: {
-                summary: "Save or update health profile",
-                tags: ["Profile"],
-                security: [{ bearerAuth: [] }],
-                requestBody: {
-                    required: true,
-                    content: {
-                        "application/json": {
-                            example: {
-                                age: 22,
-                                gender: "female",
-                                height_cm: 165,
-                                weight_kg: 58,
-                                activity_level: "medium",
-                                target_weight: 54
-                            }
-                        }
+            401: {
+                description: "Unauthorized"
+            },
+            404: {
+                description: "Profile not found"
+            }
+        }
+    },
+
+    post: {
+        summary: "Save or update health profile",
+        tags: ["Profile"],
+        security: [{ bearerAuth: [] }],
+        requestBody: {
+            required: true,
+            content: {
+                "application/json": {
+                    example: {
+                        age: 22,
+                        gender: "female",
+                        height_cm: 165,
+                        weight_kg: 58,
+                        activity_level: "medium",
+                        target_weight: 54
                     }
-                },
-                responses: {
-                    200: { description: "Profile saved, returns calculated BMI and calorie need" },
-                    400: { description: "Missing or invalid fields" },
-                    401: { description: "Unauthorized" }
                 }
             }
         },
+        responses: {
+            200: {
+                description: "Profile saved successfully"
+            },
+            400: {
+                description: "Missing or invalid profile data"
+            },
+            401: {
+                description: "Unauthorized"
+            }
+        }
+    },
 
-        // ── WATER ─────────────────────────────────────────────────────────────
+    put: {
+        summary: "Update health profile",
+        tags: ["Profile"],
+        security: [{ bearerAuth: [] }],
+        requestBody: {
+            required: true,
+            content: {
+                "application/json": {
+                    example: {
+                        age: 22,
+                        gender: "female",
+                        height_cm: 165,
+                        weight_kg: 58,
+                        activity_level: "medium",
+                        target_weight: 54
+                    }
+                }
+            }
+        },
+        responses: {
+            200: {
+                description: "Profile updated successfully"
+            },
+            400: {
+                description: "Missing or invalid profile data"
+            },
+            401: {
+                description: "Unauthorized"
+            }
+        }
+    }
+},
+
         "/api/water": {
             post: {
                 summary: "Log water intake",
@@ -249,26 +297,26 @@ const swaggerSpec = {
                 }
             }
         },
+
         "/api/water/today": {
             get: {
                 summary: "Get today's total water intake",
                 tags: ["Water"],
                 security: [{ bearerAuth: [] }],
                 responses: {
-                    200: { description: "Returns total_water_ml for today" },
+                    200: { description: "Returns today's total water intake" },
                     401: { description: "Unauthorized" }
                 }
             }
         },
 
-        // ── REPORTS ───────────────────────────────────────────────────────────
         "/api/reports/summary": {
             get: {
                 summary: "Get all-time nutrition summary",
                 tags: ["Reports"],
                 security: [{ bearerAuth: [] }],
                 responses: {
-                    200: { description: "Returns total_calories, total_meals, total_protein, total_carbs, total_fat" },
+                    200: { description: "Returns all-time nutrition summary" },
                     401: { description: "Unauthorized" }
                 }
             }
@@ -276,4 +324,7 @@ const swaggerSpec = {
     }
 };
 
-module.exports = { swaggerUi, swaggerSpec };
+module.exports = {
+    swaggerUi,
+    swaggerSpec
+};

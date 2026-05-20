@@ -6,13 +6,13 @@ const authMiddleware = require("../middleware/authMiddleware");
 const {
     getMeals,
     addMeal,
-    editMeal,    // ← deleteMeal değil
-    removeMeal   // ← deleteMeal değil
+    editMeal,    
+    removeMeal  
 } = require("../controllers/mealController");
 
 router.get("/", authMiddleware, getMeals);
 router.post("/", authMiddleware, addMeal);
-router.put("/:id", authMiddleware, editMeal);       // ← Edit Meal için
-router.delete("/:id", authMiddleware, removeMeal);  // ← removeMeal
+router.put("/:id", authMiddleware, editMeal);       
+router.delete("/:id", authMiddleware, removeMeal);  
 
 module.exports = router;
