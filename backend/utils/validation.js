@@ -10,6 +10,10 @@ function isNotPositive(value) {
     return Number(value) <= 0;
 }
 
+function isInvalidNumber(value) {
+    return isNaN(Number(value));
+}
+
 function validateRegister(data) {
     const { username, email, password } = data;
 
@@ -65,6 +69,15 @@ function validateMeal(data) {
     }
 
     if (
+        isInvalidNumber(calories) ||
+        isInvalidNumber(protein) ||
+        isInvalidNumber(carbs) ||
+        isInvalidNumber(fat)
+    ) {
+        return "Nutrition values must be valid numbers";
+    }
+
+    if (
         isNegative(calories) ||
         isNegative(protein) ||
         isNegative(carbs) ||
@@ -87,6 +100,16 @@ function validateGoal(data) {
         isMissing(water_goal)
     ) {
         return "All goal values are required";
+    }
+
+    if (
+        isInvalidNumber(calorie_goal) ||
+        isInvalidNumber(protein_goal) ||
+        isInvalidNumber(carbs_goal) ||
+        isInvalidNumber(fat_goal) ||
+        isInvalidNumber(water_goal)
+    ) {
+        return "Goal values must be valid numbers";
     }
 
     if (
@@ -135,6 +158,15 @@ function validateProfile(data) {
     }
 
     if (
+        isInvalidNumber(age) ||
+        isInvalidNumber(height_cm) ||
+        isInvalidNumber(weight_kg) ||
+        isInvalidNumber(target_weight)
+    ) {
+        return "Profile values must be valid numbers";
+    }
+
+    if (
         isNotPositive(age) ||
         isNotPositive(height_cm) ||
         isNotPositive(weight_kg) ||
@@ -151,6 +183,10 @@ function validateWater(data) {
 
     if (isMissing(amount_ml)) {
         return "Water amount is required";
+    }
+
+    if (isInvalidNumber(amount_ml)) {
+        return "Water amount must be a valid number";
     }
 
     if (isNotPositive(amount_ml)) {
