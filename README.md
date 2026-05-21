@@ -161,7 +161,7 @@ SQLite Database
 # 📁 Project Structure
 
 ```text
-nnutritrack-system/
+nutritrack-system/
 │
 ├── backend/
 │   │
